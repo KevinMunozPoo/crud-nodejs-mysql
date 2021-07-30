@@ -1,0 +1,14 @@
+/* Style overrides for jBox library */
+
+.jBox-Notice-green > div.jBox-container {
+    background: #4bbf73 !important;
+}
+
+.jBox-Confirm-button-submit {
+    background: #4bbf73 !important;
+}
+
+.tooltip {
+    opacity: 1;
+    position: initial;
+}

@@ -1,0 +1,47 @@
+/* General styles for the entire page */
+
+a {
+    text-decoration: none;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.f-row {
+    flex-direction: row;
+}
+
+.f-col {
+    flex-direction: column;
+}
+
+.f-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.f-spaced {
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-text {
+    color: white;
+}
+
+button.btn-primary:hover {
+    background-color: rgb(70, 70, 70);
+}

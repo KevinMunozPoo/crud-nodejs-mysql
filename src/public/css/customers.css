@@ -1,0 +1,20 @@
+/* Styles for customers page */
+
+.table tbody tr {
+    vertical-align: middle;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.red-hover:hover {
+    color: #d9534f;
+}
+
+.blue-hover:hover {
+    color: #1f9bcf;
+}

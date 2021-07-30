@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>CRUD Node.js MySQL</title>
+
+    <!-- Bootstrap (Lux Theme), Bootstrap Icons and Font Awesome styles -->
+    <!-- <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css">
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/5/quartz/bootstrap.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
+
+    <!-- jBox styles -->
+    <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/css/general-syles.css">
+    <link rel="stylesheet" href="/css/icon-styles.css">
+    <link rel="stylesheet" href="/css/customers.css">
+    <link rel="stylesheet" href="/css/jbox-overrides.css">
+</head>
+
+<body>
+    <!-- Header / Navbar -->
+    <%- include('./partials/header') %>
+
+    <main class="container my-5">
+        <div class="row mt-5">
+            <div class="col-lg-7 col-md-12">
+                <table class="table table-bordered table-hover">
+                    <thead class="card-header">
+                        <tr>
+                            <th>N°</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data && data.length) { %>
+                            <% data.forEach((customer, index) => { %>
+                                <tr>
+                                    <td><%= index + 1 %></td>
+                                    <td><%= customer.name %></td>
+                                    <td><%= customer.address %></td>
+                                    <td><%= customer.phone %></td>
+                                    <td>
+                                        <form method="POST"
+                                            id="delete-form__<%= customer.id %>"
+                                            action="/delete/<%= customer.id %>?_method=DELETE"
+                                        >
+                                            <div class="icon-container red-hover"
+                                                data-confirm=""
+                                                onclick="submitById('delete-form__<%= customer.id %>')"
+                                            >
+                                                <i class="fas fa-trash icon"></i>
+                                                <span class="icon-text">Delete</span>
+                                            </div>
+                                        </form>
+                                        <form method="GET"
+                                            id="edit-form__<%= customer.id %>"
+                                            action="/edit/<%= customer.id %>"
+                                        >
+                                            <div class="icon-container blue-hover"
+                                                onclick="submitById('edit-form__<%= customer.id %>')"
+                                            >
+                                                <i class="fas fa-edit icon"></i>
+                                                <span class="icon-text">Edit</span>
+                                            </div>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="5">No hay datos.</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-lg-5 col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Customers
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Add new customer</h5>
+                        <hr>
+                        <form class="form"
+                            id="customer-form"
+                            method="POST"
+                            action="<%= editMode ? '/update/' + customerToEdit.id + '?_method=PUT' : '/add' %>"
+                        >
+                            <div class="mb-3">
+                                <label class="form-label" for="name">Name:</label>
+                                <i class="fas fa-sticky-note note tooltip" title="This field is required"></i>
+                                <input class="form-control" type="text" name="name" id="name" required
+                                    value="<%= editMode ? customerToEdit.name : '' %>" <%= editMode ? 'autofocus' : '' %>
+                                >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="address">Address:</label>
+                                <input class="form-control" type="text" name="address" id="address"
+                                    value="<%= editMode ? customerToEdit.address : '' %>"
+                                >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" for="phone">Phone:</label>
+                                <input class="form-control" type="text" name="phone" id="phone"
+                                    value="<%= editMode ? customerToEdit.phone : '' %>"
+                                >
+                            </div>
+                            <% if (editMode) { %>
+                                <button type="submit" class="btn btn-info">Update customer</button>
+                            <% } else { %>
+                                <button type="submit" class="btn btn-primary">Save customer</button>
+                            <% } %>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('./partials/footer') %>
+
+    <!-- Bootstrap and Font Awesome scripts -->
+    <!-- <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+    <script src="https://kit.fontawesome.com/c589a5b783.js" crossorigin="anonymous"></script>
+
+    <!-- jQery and jBox scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
+
+    <!-- Custom scripts -->
+    <script>
+        function submitById(id) {
+            document.getElementById(id).submit();
+        };
+
+        const jBoxTooltip = new jBox('Tooltip', {
+            attach: '.tooltip',
+            theme: 'TooltipDark'
+        });
+
+        const jBoxConfirm = new jBox('Confirm', {
+            confirmButton: 'Yes, do it!',
+            cancelButton: 'Nope'
+        });
+
+        if ('<%= noticeContent %>'.length ) {
+            new jBox('Notice', {
+                content: '<%= noticeContent %>',
+                color: 'green',
+                delayOnHover: true,
+            });
+        }
+    </script>
+</body>
+
+</html>
