@@ -34,7 +34,11 @@
         "block-spacing": "warn",
         "no-whitespace-before-property": "warn",
         "space-before-blocks": "warn",
-        "space-before-function-paren": ["warn", "always"],
+        "space-before-function-paren": ["warn", {
+            "anonymous": "always",
+            "named": "never",
+            "asyncArrow": "always"
+        }],
         "space-in-parens": ["warn", "never"],
         "space-infix-ops": ["warn", { "int32Hint": false }],
         "spaced-comment": ["warn", "always", { "markers": ["-", "+", "*"] }],

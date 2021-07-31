@@ -11,12 +11,9 @@
     <meta name="author" content="Kevin Muñoz Poo">
     <meta name="description" content="Basic CRUD using Node.Js, Express and MySQL.">
 
-    <!-- Bootstrap (Lux Theme), Bootstrap Icons and Font Awesome styles -->
+    <!-- Bootstrap (Lux Theme), Font Awesome and jBox styles -->
     <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css">
-    <!-- <link rel="stylesheet" href="https://bootswatch.com/5/quartz/bootstrap.css"> -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous">
-
-    <!-- jBox styles -->
     <link href="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.css" rel="stylesheet">
 
     <!-- Custom styles -->
@@ -93,7 +90,7 @@
                         Customers
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Add new customer</h5>
+                        <h5 class="card-title"><%= editMode ? 'Edit customer' : 'Add new customer' %></h5>
                         <hr>
                         <form class="form"
                             id="customer-form"
@@ -140,11 +137,8 @@
     <script src="https://cdn.jsdelivr.net/gh/StephanWagner/jBox@v1.3.3/dist/jBox.all.min.js"></script>
 
     <!-- Custom scripts -->
+    <script src="/js/custom-javascript.js"></script>
     <script>
-        function submitById(id) {
-            document.getElementById(id).submit();
-        };
-
         const jBoxTooltip = new jBox('Tooltip', {
             attach: '.tooltip',
             theme: 'TooltipDark'
