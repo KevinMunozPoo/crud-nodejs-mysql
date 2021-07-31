@@ -7,6 +7,10 @@
     <meta name="viewport" content="initial-scale=1.0">
     <title>CRUD Node.js MySQL</title>
 
+    <link rel="icon" type="image/x-icon" href="/icon/favicon.ico" sizes="16x16 32x32 64x64">
+    <meta name="author" content="Kevin Muñoz Poo">
+    <meta name="description" content="Basic CRUD using Node.Js, Express and MySQL.">
+
     <!-- Bootstrap (Lux Theme), Bootstrap Icons and Font Awesome styles -->
     <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.css">
     <!-- <link rel="stylesheet" href="https://bootswatch.com/5/quartz/bootstrap.css"> -->
@@ -151,7 +155,7 @@
             cancelButton: 'Nope'
         });
 
-        if ('<%= noticeContent %>'.length ) {
+        if ('<%= noticeContent %>'.length) {
             new jBox('Notice', {
                 content: '<%= noticeContent %>',
                 color: 'green',
