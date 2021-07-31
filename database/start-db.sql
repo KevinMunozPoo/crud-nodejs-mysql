@@ -1,3 +1,5 @@
+-- Commands to create the database tables required for this project
+
 -- Creating the database:
 CREATE DATABASE crud_nodejs_mysql;
 
@@ -9,7 +11,7 @@ CREATE TABLE customers (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    phone VARCHAR(15)
+    phone VARCHAR(18)
 );
 
 -- To show all tables:

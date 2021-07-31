@@ -31,10 +31,10 @@ app.use(session({
 app.use(myConnection(
     mysql,
     {
-        host: 'localhost',
-        user: 'root',
-        password: 'password',
-        port: 3306,
+        host: 'localhost',  // Change this line and put the host url.
+        user: '',           // Change this line and put the username.
+        password: '',       // Change this line and put the password.
+        port: 3306,         // Change this line and put the mysql port.
         database: 'crud_nodejs_mysql',
     },
     'single'
