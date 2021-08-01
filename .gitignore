@@ -1,2 +1,5 @@
 # Dependency directories
 node_modules/
+
+# Database connection credentials
+src/config/db.config.js
